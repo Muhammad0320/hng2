@@ -1,6 +1,3 @@
-
-// mongodb+srv://muhammad0320:muhammawwal@005@atlascluster.x1qxlkc.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster 
-
 import mongoose from "mongoose";
 import app from "./app";
 
@@ -18,4 +15,3 @@ mongoose
 app.listen(port, () => {
   console.log("App running on port " + port);
 });
-
