@@ -14,7 +14,7 @@ type UserDoc = mongoose.Document & UserAttrs;
 
 type UserModel = mongoose.Model<UserDoc> & {
 
-    buildUser: (attrs: UserAttrs) => UserDoc; 
+    buildUser: (attrs: UserAttrs) => Promise<UserDoc>; 
 
 };
 
@@ -55,7 +55,8 @@ const userSchema = new mongoose.Schema<UserDoc, UserModel>(
   {
     toJSON: {
       transform(doc, ret) {
-        (ret.userId = ret._id), delete ret._id;
+        ret.userId = ret._id;
+        delete ret._id;
       },
     },
   }
@@ -66,3 +67,15 @@ userSchema.virtual("organisations", {
   localField: "_id",
   ref: "Organisation",
 });
+
+
+userSchema.statics.buildUser = async function (attrs: UserAttrs) {
+
+    return await User.create(attrs);
+
+};
+
+
+const User = mongoose.model<UserDoc, UserModel>('User', userSchema);
+
+export default User;
