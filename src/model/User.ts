@@ -19,3 +19,35 @@ type UserModel = mongoose.Model<UserDoc> & {
 };
 
 
+const userSchema = new mongoose.Schema<UserDoc, UserModel>({
+  firstName: {
+    type: String,
+    trim: true,
+    required: true,
+  },
+
+  lastName: {
+    type: String,
+    trim: true,
+    required: true,
+  },
+
+  email: {
+    type: String,
+    unique: true,
+    trim: true,
+    required: true,
+  },
+
+  password: {
+    type: String,
+    select: false,
+    required: true,
+  },
+
+  phone: {
+    type: Number,
+    required: true,
+    trim: true,
+  },
+});
