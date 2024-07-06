@@ -1,18 +1,15 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { UserStatus } from "../enums/UserStatus";
-import { UserRole } from "../enums/UserRoles";
+
 
 interface UserPayload {
   user: {
-    id: string;
-    name: string;
+    userId: string;
+    firstName: string;
+    lastName: string;
     email: string;
     password: string;
-    role: UserRole;
-    avatar: string;
-    createdAt: Date;
-    status: UserStatus;
+    phone: number;
     passwordConfirm: string;
   };
 
