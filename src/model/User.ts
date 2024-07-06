@@ -10,3 +10,12 @@ type UserAttrs = {
 };
 
 type UserDoc = mongoose.Document & UserAttrs;
+
+
+type UserModel = mongoose.Model<UserDoc> & {
+
+    buildUser: (attrs: UserAttrs) => UserDoc; 
+
+};
+
+
