@@ -1,3 +1,4 @@
+import { CryptoManager } from "@m0banking/common";
 import mongoose from "mongoose";
 
 type UserAttrs = {
@@ -11,13 +12,9 @@ type UserAttrs = {
 
 type UserDoc = mongoose.Document & UserAttrs;
 
-
 type UserModel = mongoose.Model<UserDoc> & {
-
-    buildUser: (attrs: UserAttrs) => Promise<UserDoc>; 
-
+  buildUser: (attrs: UserAttrs) => Promise<UserDoc>;
 };
-
 
 const userSchema = new mongoose.Schema<UserDoc, UserModel>(
   {
@@ -46,6 +43,17 @@ const userSchema = new mongoose.Schema<UserDoc, UserModel>(
       required: true,
     },
 
+    passwordConfirm: {
+      type: String,
+      validate: {
+        validator: function(this: UserDoc, value: string): boolean {
+          return this.password === value;
+        },
+
+        message: "Passwords are not the same",
+      },
+    },
+
     phone: {
       type: Number,
       required: true,
@@ -68,14 +76,20 @@ userSchema.virtual("organisations", {
   ref: "Organisation",
 });
 
+userSchema.pre("save", async function(next) {
+  if (this.isNew) {
+    this.passwordConfirm = undefined as any;
 
-userSchema.statics.buildUser = async function (attrs: UserAttrs) {
+    this.password = (await CryptoManager.hash(this.password)) as string;
+  }
 
-    return await User.create(attrs);
+  next();
+});
 
+userSchema.statics.buildUser = async function(attrs: UserAttrs) {
+  return await User.create(attrs);
 };
 
-
-const User = mongoose.model<UserDoc, UserModel>('User', userSchema);
+const User = mongoose.model<UserDoc, UserModel>("User", userSchema);
 
 export default User;
