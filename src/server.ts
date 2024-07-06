@@ -9,7 +9,7 @@ if (!process.env.PORT) throw new Error(" port uri not found ");
 
 const port = process.env.PORT || 8000;
 
-console.log(process.env.MONGO_URI);
+console.log(process.env.MONGO_URI, "from the shit file------------");
 
 mongoose
   .connect(process.env.MONGO_URI)
