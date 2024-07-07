@@ -8,6 +8,7 @@ import { NotFound } from "./error/NotFound";
 import { globalErrorHandler } from "./middleware/globalErrorHandler";
 import { showRouter } from "./routes/auth/show";
 import { allOrgRouter } from "./routes/org/all";
+import { showOrgRouter } from "./routes/org/show";
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(showRouter);
 rootUrl = "/api/organisations";
 
 app.use(rootUrl, allOrgRouter);
+app.use(rootUrl, showOrgRouter);
 
 
 app.all("*", () => {
