@@ -1,5 +1,5 @@
-import { CryptoManager } from "@m0banking/common";
 import mongoose from "mongoose";
+import { CryptoManager } from "../services/Crypto";
 
 type UserAttrs = {
   firstName: string;

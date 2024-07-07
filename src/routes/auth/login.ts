@@ -20,7 +20,7 @@ router.post(
 
     if (!!!existingUser) throw new BadRequest("Authentication failed");
 
-    if (!(await new CryptoManager().compare(existingUser.password, password)))
+    if (!(await CryptoManager.compare(existingUser.password, password)))
       throw new BadRequest("Authentication failed");
 
     if (!process.env.JWT_EXPIRES_IN)
