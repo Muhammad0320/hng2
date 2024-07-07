@@ -3,6 +3,7 @@ import "express-async-errors";
 import cookieSession from "cookie-session";
 import { globalErrorHandler, NotFound } from "@m0banking/common";
 import { registerUserRouter } from "./routes/auth/register";
+import { loginRouter } from "./routes/auth/login";
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(
 let rootUrl = "/api/auth";
 
 app.use(rootUrl, registerUserRouter);
+app.use(rootUrl, loginRouter);
 
 app.all("*", () => {
   throw new NotFound("Route not found");
