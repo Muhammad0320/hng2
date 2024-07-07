@@ -26,7 +26,7 @@ export const phoneValidator = () =>
     .isMobilePhone("en-NG")
     .withMessage("Please provide nigerian mobile phone no");
 
-export const firstNameValidator = (field: string) =>
+export const nameValidator = (field: string) =>
   check(field)
     .trim()
     .notEmpty()
