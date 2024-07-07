@@ -1,9 +1,11 @@
 import express from "express";
 import "express-async-errors";
 import cookieSession from "cookie-session";
-import { globalErrorHandler, NotFound } from "@m0banking/common";
+
 import { registerUserRouter } from "./routes/auth/register";
 import { loginRouter } from "./routes/auth/login";
+import { NotFound } from "./error/NotFound";
+import { globalErrorHandler } from "./middleware/globalErrorHandler";
 
 const app = express();
 
