@@ -2,9 +2,10 @@ import express, { Request, Response } from "express";
 import { emailValidator, passwordValidator } from "../../services/validators";
 import { requestValidator } from "../../middleware/requestValidator";
 import User from "../../model/User";
-import { BadRequest } from "@m0banking/common";
+
 import { CryptoManager } from "../../services/Crypto";
 import jwt from "jsonwebtoken";
+import { BadRequest } from "../../error/BadRequest";
 
 const router = express.Router();
 
