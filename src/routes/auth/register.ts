@@ -10,6 +10,7 @@ import {
   passwordValidator,
   phoneValidator,
 } from "../../services/validators";
+import Org from "../../model/Organisation";
 
 const router = express.Router();
 
@@ -55,6 +56,12 @@ router.post(
 
     const accessToken = jwt.sign(newUSer, process.env.JWT_SECRET, {
       expiresIn: +process.env.JWT_EXPIRES_IN * 24 * 60 * 60,
+    });
+
+    await Org.buildOrg({
+      description: "This org is for the test user",
+      name: `${newUSer.firstName}'s Org`,
+      userId: newUSer._id,
     });
 
     res.status(201).json({
