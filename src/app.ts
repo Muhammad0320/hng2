@@ -7,6 +7,7 @@ import { loginRouter } from "./routes/auth/login";
 import { NotFound } from "./error/NotFound";
 import { globalErrorHandler } from "./middleware/globalErrorHandler";
 import { showRouter } from "./routes/auth/show";
+import { allOrgRouter } from "./routes/org/all";
 
 const app = express();
 
@@ -28,7 +29,12 @@ let rootUrl = "/api/auth";
 
 app.use(rootUrl, registerUserRouter);
 app.use(rootUrl, loginRouter);
-app.use(rootUrl, showRouter);
+app.use(showRouter);
+
+rootUrl = "/api/organisation";
+
+app.use(rootUrl, allOrgRouter);
+
 
 app.all("*", () => {
   throw new NotFound("Route not found");
