@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 type OrgAttrs = {
-  orgId: string;
+  userId: string;
   name: string;
   description: string;
 };
@@ -41,7 +41,7 @@ orgSchema.virtual("users", {
 });
 
 orgSchema.statics.buildOrg = async (attrs: OrgAttrs) => {
-  return await Org.create(attrs);
+  return await Org.create({...attrs, userId: [ attrs.userId ] });
 };
 
 const Org = mongoose.model<OrgDoc, OrgModel>("Org", orgSchema);
