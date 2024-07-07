@@ -31,7 +31,7 @@ app.use(rootUrl, registerUserRouter);
 app.use(rootUrl, loginRouter);
 app.use(showRouter);
 
-rootUrl = "/api/organisation";
+rootUrl = "/api/organisations";
 
 app.use(rootUrl, allOrgRouter);
 
