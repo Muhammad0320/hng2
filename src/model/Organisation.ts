@@ -41,7 +41,7 @@ orgSchema.virtual("users", {
 });
 
 orgSchema.statics.buildOrg = async (attrs: OrgAttrs) => {
-  return await Org.create({...attrs, userId: [ attrs.userId ] });
+  return await Org.create({ ...attrs, users: [attrs.userId] });
 };
 
 const Org = mongoose.model<OrgDoc, OrgModel>("Org", orgSchema);
