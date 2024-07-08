@@ -1,7 +1,14 @@
 import request from "supertest";
 import app from "../../app";
-import User from "../../model/User";
 import { userBuilder } from "../builder";
+
+it("returns an error other than 404 if route exists", async () => {
+  const { statusCode } = await request(app)
+    .post("/api/auth/login")
+    .send({ email: "shitemail", password: "shitPassword" });
+
+  expect(statusCode).not.toEqual(404);
+});
 
 it("returns a 400 on invalid email format ", async () => {
   await request(app)
