@@ -40,5 +40,16 @@ it("returns a 200 when everything is valid", async () => {
   await request(app)
     .post("/api/auth/login")
     .send({ email, password: "shitPassword" })
-    .expect(400);
+    .expect(200);
+});
+
+it("stores and saves a cookie on valid auth", async () => {
+  const { email } = await userBuilder();
+
+  const response = await request(app)
+    .post("/api/auth/login")
+    .send({ email, password: "shitPassword" })
+    .expect(200);
+
+  expect(response.get("Set-Cookie")).toBeDefined();
 });
