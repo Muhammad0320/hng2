@@ -11,6 +11,7 @@ import { allOrgRouter } from "./routes/org/all";
 import { showOrgRouter } from "./routes/org/show";
 import { newOrgRouter } from "./routes/org/new";
 import { addNewUserToOrg } from "./routes/org/add";
+import { currentUser } from "./middleware/currentUser";
 
 const app = express();
 
@@ -35,7 +36,7 @@ app.use(rootUrl, loginRouter);
 app.use(showRouter);
 
 rootUrl = "/api/organisations";
-
+app.use(currentUser);
 app.use(rootUrl, allOrgRouter);
 app.use(rootUrl, showOrgRouter);
 app.use(rootUrl, newOrgRouter);

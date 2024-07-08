@@ -1,15 +1,16 @@
 import express, { Request, Response } from "express";
-import { requireAuth } from "../../middleware/requireAuth";
-import { paramsChecker } from "../../middleware/paramsChecker";
-import Org from "../../model/Organisation";
 import { NotFound } from "../../error/NotFound";
-import { idValidator } from "../../services/validators";
+import { paramsChecker } from "../../middleware/paramsChecker";
 import { requestValidator } from "../../middleware/requestValidator";
+import { requireAuth } from "../../middleware/requireAuth";
+import Org from "../../model/Organisation";
+import { idValidator } from "../../services/validators";
 
 const router = express.Router();
 
 router.post(
   "/:id/users",
+
   requireAuth,
   paramsChecker("id"),
   [idValidator()],
@@ -29,3 +30,4 @@ router.post(
 );
 
 export { router as addNewUserToOrg };
+

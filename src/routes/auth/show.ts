@@ -1,13 +1,15 @@
 import express, { Request, Response } from "express";
-import { requireAuth } from "../../middleware/requireAuth";
+import { BadRequest } from "../../error/BadRequest";
+import { currentUser } from "../../middleware/currentUser";
 import { paramsChecker } from "../../middleware/paramsChecker";
 import User from "../../model/User";
-import { BadRequest } from "../../error/BadRequest";
+import { requireAuth } from "../../middleware/requireAuth";
 
 const router = express.Router();
 
 router.get(
   "/api/users/:id",
+  currentUser,
   requireAuth,
   paramsChecker("id"),
   async (req: Request, res: Response) => {
@@ -26,3 +28,4 @@ router.get(
 );
 
 export { router as showRouter };
+
