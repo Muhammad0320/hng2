@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { CryptoManager } from "../services/Crypto";
+import Org from "./Organisation";
 
 type UserAttrs = {
   firstName: string;
@@ -10,7 +11,7 @@ type UserAttrs = {
   phone: number;
 };
 
-type UserDoc = mongoose.Document & UserAttrs  & {userId: string};
+type UserDoc = mongoose.Document & UserAttrs & { userId: string };
 
 type UserModel = mongoose.Model<UserDoc> & {
   buildUser: (attrs: UserAttrs) => Promise<UserDoc>;
@@ -87,7 +88,15 @@ userSchema.pre("save", async function(next) {
 });
 
 userSchema.statics.buildUser = async function(attrs: UserAttrs) {
-  return await User.create(attrs);
+  const user = await User.create(attrs);
+
+  await Org.buildOrg({
+    userId: user.userId,
+    description: `${user.firstName}'s newly created organization`,
+    name: `${user.firstName}'s org`,
+  });
+
+  return user;
 };
 
 const User = mongoose.model<UserDoc, UserModel>("User", userSchema);
