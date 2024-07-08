@@ -3,10 +3,21 @@
   "version": "1.0.0",
   "main": "server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": " npm run build && node --env-file config.env dist/server.js "
+    "start": " npm run build && node --env-file config.env dist/server.js ",
+    "test": "jest --watchAll --no-cache"
+
   },
+
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./src/test/setup.ts"
+    ],
+    "testTimeout": 600000
+  },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
