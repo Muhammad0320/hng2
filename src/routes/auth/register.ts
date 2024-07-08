@@ -64,6 +64,11 @@ router.post(
       userId: newUSer._id,
     });
 
+
+    req.session = {
+      jwt: accessToken,
+    };
+
     res.status(201).json({
       status: "success",
       message: "Registration Successful",
