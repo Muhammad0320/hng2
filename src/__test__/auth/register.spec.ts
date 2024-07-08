@@ -132,5 +132,10 @@ it("stores an acess token", async () => {
     })
     .expect(400);
 
+  console.log(response.get("Set-Cookie"));
+
   expect(response.get("Set-Cookie")?.at(0)).toBeDefined();
 });
+
+
+
