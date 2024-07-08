@@ -46,5 +46,5 @@ it("returns a 200 when wverything is valid", async () => {
   await request(app)
     .get(`/api/organisations/${org.id}`)
     .set("Cookie", await global.signin(user.id))
-    .expect(400);
+    .expect(200);
 });
