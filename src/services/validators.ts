@@ -1,4 +1,5 @@
 import { check } from "express-validator";
+import mongoose from "mongoose";
 
 export const emailValidator = () =>
   check("email")
@@ -32,3 +33,11 @@ export const nameValidator = (field: string) =>
     .notEmpty()
     .isLength({ min: 2 })
     .withMessage("Please provide a valid name");
+
+export const idValidator = () =>
+  check("userId")
+    .isString()
+    .trim()
+    .notEmpty()
+    .custom((input: string) => mongoose.Types.ObjectId.isValid(input))
+    .withMessage("Provide a valid mongoose id");
