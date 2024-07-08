@@ -8,8 +8,6 @@ declare global {
   var signin: (id?: string) => Promise<string[]>;
 }
 
-jest.mock("../natswrapper.ts");
-
 beforeAll(async () => {
   process.env.JWT_KEY = "my-super-long-and-ultra-secured-jwt-secret-key";
   process.env.JWT_EXPIRES_IN = "24";
