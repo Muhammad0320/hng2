@@ -1,7 +1,6 @@
+import mongoose from "mongoose";
 import request from "supertest";
 import app from "../../app";
-import mongoose from "mongoose";
-import { displayPartsToString } from "typescript";
 import { orgBuilder, userBuilder } from "../builder";
 
 it("returns a 401 for unauthorized request", async () => {
@@ -42,8 +41,6 @@ it("returns a 400 if a user tried to access an org s/he does not have access", a
 
     .expect(400);
 });
-
-
 
 it("returns a 200 when wverything is valid", async () => {
   const user = await userBuilder();
