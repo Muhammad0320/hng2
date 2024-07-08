@@ -6,6 +6,8 @@ import { userBuilder } from "../builder";
 it("returns a 401 for unauthenticated user", async () => {
   await request(app)
     .get("/api/organisations/shitid/users")
+    .send()
+
     .expect(401);
 });
 
@@ -13,6 +15,8 @@ it("returns a 400 for invalid mongoose id", async () => {
   await request(app)
     .get("/api/organisations/shitid/users")
     .set("Cookie", await global.signin())
+    .send()
+
     .expect(400);
 });
 
@@ -22,6 +26,8 @@ it("returns a 404 for valid but umatched userId", async () => {
   await request(app)
     .get(`/api/organisations/${userId}/users`)
     .set("Cookie", await global.signin())
+    .send()
+
     .expect(404);
 });
 
@@ -31,5 +37,8 @@ it("returns a 200 when e/thing is valid", async () => {
   await request(app)
     .get(`/api/organisations/${userId}/users`)
     .set("Cookie", await global.signin())
+    .send()
     .expect(200);
 });
+
+
