@@ -102,3 +102,35 @@ it("returns a 400 if email already exists", async () => {
     })
     .expect(400);
 });
+
+
+
+it("returns a 200 on valid input", async () => {
+  await request(app)
+    .post("/api/auth/register")
+    .send({
+      email: "shitmail@gmail.com",
+      password: "shitPassword",
+      passwordConfim: "shitPassword",
+      firstName: "paul",
+      lastName: "lisanAlgaib",
+      phone: +2349166537641,
+    })
+    .expect(200);
+});
+
+it("stores an acess token", async () => {
+  const response = await request(app)
+    .post("/api/auth/register")
+    .send({
+      email: "shitmail@gmail.com",
+      password: "shitPassword",
+      passwordConfim: "shitPassword",
+      firstName: "paul",
+      lastName: "lisanAlgaib",
+      phone: +2349166537641,
+    })
+    .expect(400);
+
+  expect(response.get("Set-Cookie")?.at(0)).toBeDefined();
+});
