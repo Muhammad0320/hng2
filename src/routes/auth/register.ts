@@ -59,12 +59,6 @@ router.post(
       expiresIn: +process.env.JWT_EXPIRES_IN * 24 * 60 * 60,
     });
 
-    await Org.buildOrg({
-      description: "This org is for the test user",
-      name: `${newUSer.firstName}'s Org`,
-      userId: newUSer._id,
-    });
-
     req.session = {
       jwt: accessToken,
     };
@@ -77,7 +71,7 @@ router.post(
         user: newUSer,
       },
     });
-  }
+  };
 );
 
 export { router as registerUserRouter };
