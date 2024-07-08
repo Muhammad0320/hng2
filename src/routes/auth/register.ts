@@ -17,7 +17,7 @@ router.post(
   "/register",
   [
     nameValidator("firstName"),
-    nameValidator("lastname"),
+    nameValidator("lastName"),
     emailValidator(),
     passwordValidator(),
     passwordConfirmValidator(),
@@ -74,4 +74,3 @@ router.post(
 );
 
 export { router as registerUserRouter };
-

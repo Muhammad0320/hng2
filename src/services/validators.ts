@@ -28,11 +28,10 @@ export const phoneValidator = () =>
     .withMessage("Please provide nigerian mobile phone no");
 
 export const nameValidator = (field: string) =>
-  check(field)
-    .trim()
-    .notEmpty()
-    .isLength({ min: 2 })
-    .withMessage("Please provide a valid name");
+         check(field)
+           .trim()
+           .notEmpty()
+           .withMessage("Please provide a valid name");
 
 export const idValidator = () =>
   check("userId")
