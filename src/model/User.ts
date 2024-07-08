@@ -10,7 +10,7 @@ type UserAttrs = {
   phone: number;
 };
 
-type UserDoc = mongoose.Document & UserAttrs;
+type UserDoc = mongoose.Document & UserAttrs  & {userId: string};
 
 type UserModel = mongoose.Model<UserDoc> & {
   buildUser: (attrs: UserAttrs) => Promise<UserDoc>;
