@@ -58,5 +58,5 @@ it("stores and saves a cookie on valid auth", async () => {
     .send({ email, password: "shitPassword" })
     .expect(200);
 
-  expect(response.get("Set-Cookie")).toBeDefined();
+  expect(response.get("Set-Cookie")?.at(0)).toBeDefined();
 });
