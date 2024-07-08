@@ -19,6 +19,14 @@ const orgSchema = new Schema<OrgDoc, OrgModel>(
       trim: true,
     },
 
+    users: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+    ],
+
     description: {
       type: String,
       trim: true,
@@ -34,11 +42,7 @@ const orgSchema = new Schema<OrgDoc, OrgModel>(
   }
 );
 
-orgSchema.virtual("users", {
-  localField: "_id",
-  foreignField: "users",
-  ref: "User",
-});
+
 
 orgSchema.statics.buildOrg = async (attrs: OrgAttrs) => {
   return await Org.create({ ...attrs, users: [attrs.userId] });
