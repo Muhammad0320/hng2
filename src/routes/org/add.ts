@@ -23,7 +23,7 @@ router.post(
 
     res.status(200).json({
       status: "success",
-      message: "",
+      message: "user addded to organization succesfully",
     });
   }
 );
