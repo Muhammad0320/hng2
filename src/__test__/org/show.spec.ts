@@ -1,6 +1,8 @@
 import request from "supertest";
 import app from "../../app";
 import mongoose from "mongoose";
+import { displayPartsToString } from "typescript";
+import { orgBuilder, userBuilder } from "../builder";
 
 it("returns a 401 for unauthorized request", async () => {
   await request(app)
@@ -22,6 +24,16 @@ it("returns a 404 for valid but umatched id", async () => {
   await request(app)
     .get(`/api/organisations/${id}`)
     .set("Cookie", await global.signin())
-
     .expect(404);
 });
+
+it("returns a 400 if a user tried to access an org s/he does not have access", async () => {
+  const user = await userBuilder();
+  const org = await orgBuilder(user.id);
+
+  await request(app)
+    .get(`/api/organisations/${org.id}`)
+    .set("Cookie", await global.signin())
+    .expect(400);
+});
+
