@@ -37,3 +37,14 @@ it("returns a 400 if a user tried to access an org s/he does not have access", a
     .expect(400);
 });
 
+
+
+it("returns a 200 when wverything is valid", async () => {
+  const user = await userBuilder();
+  const org = await orgBuilder(user.id);
+
+  await request(app)
+    .get(`/api/organisations/${org.id}`)
+    .set("Cookie", await global.signin(user.id))
+    .expect(400);
+});
