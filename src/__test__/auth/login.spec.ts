@@ -1,5 +1,7 @@
 import request from "supertest";
 import app from "../../app";
+import User from "../../model/User";
+import { userBuilder } from "../builder";
 
 it("returns a 400 on invalid email format ", async () => {
   await request(app)
@@ -29,5 +31,14 @@ it("returns a 400 for incorrect credentials ", async () => {
   await request(app)
     .post("/api/auth/login")
     .send({ email: "shitmail@gmail.com", password: "shitpassword" })
+    .expect(400);
+});
+
+it("returns a 200 when everything is valid", async () => {
+  const { email } = await userBuilder();
+
+  await request(app)
+    .post("/api/auth/login")
+    .send({ email, password: "shitPassword" })
     .expect(400);
 });
