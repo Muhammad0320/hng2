@@ -10,4 +10,11 @@ it("returns a 401 for unauththenticaged req", async () => {
 
 it("returns a 200 for valid request", async () => {
   await userBuilder();
+
+  await request(app)
+    .get(`/api/organisations`)
+    .set("Cookie", await global.signin())
+    .expect(200);
 });
+
+
