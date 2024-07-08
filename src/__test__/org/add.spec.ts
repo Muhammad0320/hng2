@@ -1,6 +1,7 @@
 import request from "supertest";
 import app from "../../app";
 import mongoose from "mongoose";
+import { userBuilder } from "../builder";
 
 it("returns a 401 for unauthenticated user", async () => {
   await request(app)
@@ -22,4 +23,13 @@ it("returns a 404 for valid but umatched userId", async () => {
     .get(`/api/organisations/${userId}/users`)
     .set("Cookie", await global.signin())
     .expect(404);
+});
+
+it("returns a 200 when e/thing is valid", async () => {
+  const { userId } = await userBuilder();
+
+  await request(app)
+    .get(`/api/organisations/${userId}/users`)
+    .set("Cookie", await global.signin())
+    .expect(200);
 });
