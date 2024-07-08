@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import "express-async-errors";
 import cookieSession from "cookie-session";
 
@@ -30,6 +30,9 @@ app.use(
 );
 
 let rootUrl = "/api/auth";
+app.get(rootUrl, (req: Request, res: Response) => {
+  res.send("Welcome!!!!!");
+});
 
 app.use(rootUrl, registerUserRouter);
 app.use(rootUrl, loginRouter);
@@ -49,4 +52,3 @@ app.all("*", () => {
 app.use(globalErrorHandler);
 
 export default app;
-

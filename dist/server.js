@@ -1,5 +1,4 @@
 "use strict";
-// mongodb+srv://muhammad0320:muhammawwal@005@atlascluster.x1qxlkc.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster 
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -11,7 +10,6 @@ if (!process.env.MONGO_URI)
 if (!process.env.PORT)
     throw new Error(" port uri not found ");
 const port = process.env.PORT || 8000;
-console.log(process.env.MONGO_URI, "from the shit file------------");
 mongoose_1.default
     .connect(process.env.MONGO_URI)
     .then(() => console.log("DB connection successful"));
