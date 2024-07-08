@@ -18,6 +18,7 @@ router.post(
   "/register",
   [
     nameValidator("firstName"),
+    nameValidator("lastname"),
     emailValidator(),
     passwordValidator(),
     passwordConfirmValidator(),
@@ -63,7 +64,6 @@ router.post(
       name: `${newUSer.firstName}'s Org`,
       userId: newUSer._id,
     });
-
 
     req.session = {
       jwt: accessToken,
