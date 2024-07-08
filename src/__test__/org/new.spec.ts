@@ -34,3 +34,11 @@ it("returns a 400 if org name already exists", async () => {
     .send({ name: org.name })
     .expect(400);
 });
+
+it("returns a 200 when everything is valid", async () => {
+  await request(app)
+    .get(`/api/organisations`)
+    .set("Cookie", await global.signin())
+    .send({ name: "Ahmad org" })
+    .expect(400);
+});
