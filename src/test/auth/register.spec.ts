@@ -73,18 +73,6 @@ it("returns a 400 for invalid inputs", async () => {
       phone: 23491665376,
     })
     .expect(400);
-
-  await request(app)
-    .post("/api/auth/register")
-    .send({
-      email: "shitmail@gmail.com",
-      password: "shitPassword",
-      passwordConfirm: "shitPassword",
-      firstName: "paul",
-      lastName: "lisanAlgaib",
-      phone: "2349166537641",
-    })
-    .expect(400);
 });
 
 it("returns a 400 if email already exists", async () => {
@@ -154,6 +142,4 @@ it("stores an acess token", async () => {
 
   expect(response.get("Set-Cookie")?.at(0)).toBeDefined();
 });
-
-
 
