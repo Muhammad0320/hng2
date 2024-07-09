@@ -7,7 +7,7 @@ type OrgAttrs = {
   description: string;
 };
 
-type OrgDoc = mongoose.Document & OrgAttrs & { users: UserDoc[] };
+type OrgDoc = mongoose.Document & OrgAttrs & { users: mongoose.Schema.Types.ObjectId[] };
 
 type OrgModel = mongoose.Model<OrgDoc> & {
   buildOrg: (attrs: OrgAttrs) => Promise<OrgDoc>;

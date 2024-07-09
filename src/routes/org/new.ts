@@ -1,14 +1,15 @@
 import express, { Request, Response } from "express";
-import { requireAuth } from "../../middleware/requireAuth";
-import { nameValidator } from "../../services/validators";
-import { requestValidator } from "../../middleware/requestValidator";
-import Org from "../../model/Organisation";
 import { BadRequest } from "../../error/BadRequest";
+import { requestValidator } from "../../middleware/requestValidator";
+import { requireAuth } from "../../middleware/requireAuth";
+import Org from "../../model/Organisation";
+import { nameValidator } from "../../services/validators";
 
 const router = express.Router();
 
 router.post(
   "/",
+
   requireAuth,
   [nameValidator("name"), nameValidator("description")],
   requestValidator,
@@ -22,7 +23,7 @@ router.post(
     const newOrg = await Org.buildOrg({
       description,
       name,
-      userId: req.currentUser.userId,
+      userId: [req.currentUser.userId],
     });
 
     res.status(200).json({
