@@ -24,7 +24,7 @@ const orgSchema = new Schema<OrgDoc, OrgModel>(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        required: true,
+        // required: true,
       },
     ],
 
@@ -43,9 +43,12 @@ const orgSchema = new Schema<OrgDoc, OrgModel>(
   }
 );
 
-
 orgSchema.statics.buildOrg = async (attrs: OrgAttrs) => {
-  return await Org.create({ ...attrs, users: attrs.userId });
+  const org = await Org.create({ ...attrs, users: attrs.userId });
+
+  console.log(org);
+
+  return org;
 };
 
 const Org = mongoose.model<OrgDoc, OrgModel>("Org", orgSchema);
