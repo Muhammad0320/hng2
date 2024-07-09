@@ -9,7 +9,7 @@ declare global {
 }
 
 beforeAll(async () => {
-  process.env.JWT_KEY = "my-super-long-and-ultra-secured-jwt-secret-key";
+  process.env.JWT_SECRET = "my-super-long-and-ultra-secured-jwt-secret-key";
   process.env.JWT_EXPIRES_IN = "24";
   mongo = await MongoMemoryServer.create();
 
