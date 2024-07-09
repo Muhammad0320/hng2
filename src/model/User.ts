@@ -75,7 +75,7 @@ const userSchema = new mongoose.Schema<UserDoc, UserModel>(
   {
     toJSON: {
       transform(doc, ret) {
-        ret.orgId = ret._id;
+        ret.userId = ret._id;
         delete ret._id;
       },
     },
@@ -96,7 +96,7 @@ userSchema.statics.buildUser = async function(attrs: UserAttrs) {
   const user = await User.create(attrs);
 
   const org = await Org.buildOrg({
-    userId: [user.userId],
+    userId: user._id,
     description: `${user.firstName}'s newly created organization`,
     name: `${user.firstName}'s org`,
   });

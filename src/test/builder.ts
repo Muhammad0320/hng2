@@ -9,12 +9,12 @@ export const userBuilder = (id?: string) =>
     lastName: "Balogun",
     password: "shitPassword",
     passwordConfirm: "shitPassword",
-    phone: +2349166537641,
+    phone: 2349166537641,
   });
 
 export const orgBuilder = (userId: mongoose.Schema.Types.ObjectId) =>
   Org.buildOrg({
-    userId: [userId],
+    userId: userId,
     name: "Muhmaads org",
     description: "This is muhammads org",
   });

@@ -23,7 +23,7 @@ router.post(
     const newOrg = await Org.buildOrg({
       description,
       name,
-      userId: [req.currentUser.userId],
+      userId: req.currentUser.userId,
     });
 
     res.status(200).json({
