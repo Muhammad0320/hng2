@@ -12,7 +12,7 @@ it("returns a 400 for invalid inputs", async () => {
       passwordConfim: "shitPassword",
       firstName: "paul",
       lastName: "lisanAlgaib",
-      phone: +2349166537641,
+      phone: 2349166537641,
     })
     .expect(400);
 
@@ -23,7 +23,7 @@ it("returns a 400 for invalid inputs", async () => {
       passwordConfim: "shitPassword",
       firstName: "paul",
       lastName: "lisanAlgaib",
-      phone: +2349166537641,
+      phone: 2349166537641,
     })
     .expect(400);
 
@@ -35,7 +35,7 @@ it("returns a 400 for invalid inputs", async () => {
       passwordConfim: "shitPassword",
       firstName: "paul",
       lastName: "lisanAlgaib",
-      phone: +2349166537641,
+      phone: 2349166537641,
     })
     .expect(400);
 
@@ -47,7 +47,7 @@ it("returns a 400 for invalid inputs", async () => {
 
       firstName: "paul",
       lastName: "lisanAlgaib",
-      phone: +2349166537641,
+      phone: 2349166537641,
     })
     .expect(400);
 
@@ -59,7 +59,7 @@ it("returns a 400 for invalid inputs", async () => {
       passwordConfim: "shitPassword",
 
       lastName: "lisanAlgaib",
-      phone: +2349166537641,
+      phone: 2349166537641,
     })
     .expect(400);
 
@@ -71,7 +71,7 @@ it("returns a 400 for invalid inputs", async () => {
       passwordConfim: "shitPassword",
       firstName: "paul",
       lastName: "lisanAlgaib",
-      phone: +23491665376,
+      phone: 23491665376,
     })
     .expect(400);
 
@@ -99,7 +99,7 @@ it("returns a 400 if email already exists", async () => {
       passwordConfim: "shitPassword",
       firstName: "paul",
       lastName: "lisanAlgaib",
-      phone: +2349166537641,
+      phone: 2349166537641,
     })
     .expect(400);
 });
@@ -113,7 +113,7 @@ it("returns a 200 on valid input", async () => {
       passwordConfim: "shitPassword",
       firstName: "paul",
       lastName: "lisanAlgaib",
-      phone: +2349166537641,
+      phone: 2349166537641,
     })
     .expect(201);
 });
@@ -131,7 +131,7 @@ it("creates an org off of the user", async () => {
       passwordConfim: "shitPassword",
       firstName: "paul",
       lastName: "lisanAlgaib",
-      phone: +2349166537641,
+      phone: 2349166537641,
     })
     .expect(201);
 
@@ -149,7 +149,7 @@ it("stores an acess token", async () => {
       passwordConfim: "shitPassword",
       firstName: "paul",
       lastName: "lisanAlgaib",
-      phone: +2349166537641,
+      phone: 2349166537641,
     })
     .expect(201);
 
