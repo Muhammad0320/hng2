@@ -1,11 +1,11 @@
 import express, { Request, Response } from "express";
-import { emailValidator, passwordValidator } from "../../services/validators";
 import { requestValidator } from "../../middleware/requestValidator";
 import User from "../../model/User";
+import { emailValidator, passwordValidator } from "../../services/validators";
 
-import { CryptoManager } from "../../services/Crypto";
 import jwt from "jsonwebtoken";
 import { BadRequest } from "../../error/BadRequest";
+import { CryptoManager } from "../../services/Crypto";
 
 const router = express.Router();
 
@@ -28,9 +28,17 @@ router.post(
 
     if (!process.env.JWT_SECRET) throw new Error(" Jwt secret not found ");
 
-    const accessToken = jwt.sign(existingUser, process.env.JWT_SECRET, {
-      expiresIn: +process.env.JWT_EXPIRES_IN * 24 * 60 * 60,
-    });
+    const accessToken = jwt.sign(
+      { user: existingUser },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: +process.env.JWT_EXPIRES_IN * 24 * 60 * 60,
+      }
+    );
+
+    req.session = {
+      jwt: accessToken,
+    };
 
     res.status(200).json({
       status: "success",
