@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 import { UserDoc } from "./User";
 
 type OrgAttrs = {
-  userId: mongoose.Schema.Types.ObjectId[];
+  userId: mongoose.Schema.Types.ObjectId;
   name: string;
   description: string;
 };
@@ -44,7 +44,11 @@ const orgSchema = new Schema<OrgDoc, OrgModel>(
 );
 
 orgSchema.statics.buildOrg = async (attrs: OrgAttrs) => {
-  const org = await Org.create({ ...attrs, users: attrs.userId });
+
+  console.log(attrs.userId, "The user id provided to the org");
+    
+  const org = await Org.create({ ...attrs, users: [attrs.userId ]});
+
 
   console.log(org);
 

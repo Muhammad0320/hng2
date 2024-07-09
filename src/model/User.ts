@@ -75,7 +75,7 @@ const userSchema = new mongoose.Schema<UserDoc, UserModel>(
   {
     toJSON: {
       transform(doc, ret) {
-        ret.userId = ret._id;
+        ret.orgId = ret._id;
         delete ret._id;
       },
     },
@@ -104,10 +104,12 @@ userSchema.statics.buildUser = async function(attrs: UserAttrs) {
   console.log(org, "New organisation");
 
   await user.updateOne({
-    organisation: [org.id],
+    organisation: [org._id],
   });
 
-  return user;
+  const updateduser = await User.findById(user._id);
+
+  return updateduser;
 };
 
 const User = mongoose.model<UserDoc, UserModel>("User", userSchema);
