@@ -11,8 +11,11 @@ type UserAttrs = {
   phone: number;
 };
 
-type UserDoc = mongoose.Document &
-  UserAttrs & { userId: string; organisation: Array<string> };
+export type UserDoc = mongoose.Document &
+  UserAttrs & {
+    userId: mongoose.Schema.Types.ObjectId;
+    organisation: mongoose.Schema.Types.ObjectId[];
+  };
 
 type UserModel = mongoose.Model<UserDoc> & {
   buildUser: (attrs: UserAttrs) => Promise<UserDoc>;
@@ -93,14 +96,16 @@ userSchema.statics.buildUser = async function(attrs: UserAttrs) {
   const user = await User.create(attrs);
 
   const org = await Org.buildOrg({
-    userId: user.userId,
+    userId: [user.userId],
     description: `${user.firstName}'s newly created organization`,
     name: `${user.firstName}'s org`,
   });
 
   console.log(org, "New organisation");
 
-  await user.updateOne({ organisation: org.id });
+  await user.updateOne({
+    organisation: [org.id],
+  });
 
   return user;
 };

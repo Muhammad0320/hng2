@@ -1,12 +1,13 @@
 import mongoose, { Schema } from "mongoose";
+import { UserDoc } from "./User";
 
 type OrgAttrs = {
-  userId: string;
+  userId: mongoose.Schema.Types.ObjectId[];
   name: string;
   description: string;
 };
 
-  type OrgDoc = mongoose.Document & OrgAttrs & {users: string[]} ;
+type OrgDoc = mongoose.Document & OrgAttrs & { users: UserDoc[] };
 
 type OrgModel = mongoose.Model<OrgDoc> & {
   buildOrg: (attrs: OrgAttrs) => Promise<OrgDoc>;
@@ -41,7 +42,6 @@ const orgSchema = new Schema<OrgDoc, OrgModel>(
     },
   }
 );
-
 
 
 orgSchema.statics.buildOrg = async (attrs: OrgAttrs) => {
