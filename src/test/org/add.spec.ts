@@ -43,7 +43,7 @@ it("returns a 200 when e/thing is valid", async () => {
     .set("Cookie", await global.signin())
     .send({ userId: user.id })
 
-    .expect(404);
+    .expect(200);
 });
 
 
