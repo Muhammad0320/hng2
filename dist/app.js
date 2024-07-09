@@ -26,7 +26,7 @@ app.use((0, cookie_session_1.default)({
     secure: false,
 }));
 let rootUrl = "/api/auth";
-app.get(rootUrl, (req, res) => {
+app.get("/api", (req, res) => {
     res.send("Welcome!!!!!");
 });
 app.use(rootUrl, register_1.registerUserRouter);
