@@ -7,6 +7,7 @@ class NotFound extends CustomError_1.CustomError {
         super();
         this.message = message;
         this.statusCode = 404;
+        this.status = "NotFound";
         Object.setPrototypeOf(this, NotFound.prototype);
     }
     serializeError() {

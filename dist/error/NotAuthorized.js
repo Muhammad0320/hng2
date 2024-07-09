@@ -6,10 +6,11 @@ class NotAuthorized extends CustomError_1.CustomError {
     constructor() {
         super();
         this.statusCode = 401;
+        this.status = "Unauthorized";
         Object.setPrototypeOf(this, NotAuthorized.prototype);
     }
     serializeError() {
-        return [{ message: 'Not Authorized, Please signin' }];
+        return [{ message: "Not Authorized, Please signin" }];
     }
 }
 exports.NotAuthorized = NotAuthorized;

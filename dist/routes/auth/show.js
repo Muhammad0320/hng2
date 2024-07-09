@@ -14,17 +14,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.showRouter = void 0;
 const express_1 = __importDefault(require("express"));
-const BadRequest_1 = require("../../error/BadRequest");
+const NotFound_1 = require("../../error/NotFound");
 const currentUser_1 = require("../../middleware/currentUser");
 const paramsChecker_1 = require("../../middleware/paramsChecker");
-const User_1 = __importDefault(require("../../model/User"));
 const requireAuth_1 = require("../../middleware/requireAuth");
+const User_1 = __importDefault(require("../../model/User"));
 const router = express_1.default.Router();
 exports.showRouter = router;
 router.get("/api/users/:id", currentUser_1.currentUser, requireAuth_1.requireAuth, (0, paramsChecker_1.paramsChecker)("id"), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield User_1.default.findById(req.params.id);
+    const user = yield User_1.default.findById(req.params.id).select("-org");
     if (!user)
-        throw new BadRequest_1.BadRequest("User not found");
+        throw new NotFound_1.NotFound("User not found");
     res.status(200).json({
         status: "suceess",
         message: "Load data",

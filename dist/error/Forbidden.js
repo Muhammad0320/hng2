@@ -7,6 +7,7 @@ class Forbidden extends CustomError_1.CustomError {
         super();
         this.message = message;
         this.statusCode = 403;
+        this.status = "Forbidden";
         Object.setPrototypeOf(this, Forbidden.prototype);
     }
     serializeError() {

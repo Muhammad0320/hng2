@@ -51,6 +51,12 @@ const userSchema = new mongoose_1.default.Schema({
         required: true,
         trim: true,
     },
+    organisation: [
+        {
+            type: mongoose_1.default.Schema.Types.ObjectId,
+            ref: "Org",
+        },
+    ],
 }, {
     toJSON: {
         transform(doc, ret) {
@@ -58,11 +64,6 @@ const userSchema = new mongoose_1.default.Schema({
             delete ret._id;
         },
     },
-});
-userSchema.virtual("organisations", {
-    foreignField: "users",
-    localField: "_id",
-    ref: "Organisation",
 });
 userSchema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -76,12 +77,17 @@ userSchema.pre("save", function (next) {
 userSchema.statics.buildUser = function (attrs) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = yield User.create(attrs);
-        yield Organisation_1.default.buildOrg({
-            userId: user.userId,
+        const org = yield Organisation_1.default.buildOrg({
+            userId: user._id,
             description: `${user.firstName}'s newly created organization`,
             name: `${user.firstName}'s org`,
         });
-        return user;
+        console.log(org, "New organisation");
+        yield user.updateOne({
+            organisation: [org._id],
+        });
+        const updateduser = yield User.findById(user._id);
+        return updateduser;
     });
 };
 const User = mongoose_1.default.model("User", userSchema);

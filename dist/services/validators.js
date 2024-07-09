@@ -8,6 +8,7 @@ const express_validator_1 = require("express-validator");
 const mongoose_1 = __importDefault(require("mongoose"));
 const emailValidator = () => (0, express_validator_1.check)("email")
     .trim()
+    .notEmpty()
     .isEmail()
     .withMessage("Please provide a valid email format ");
 exports.emailValidator = emailValidator;
@@ -17,7 +18,7 @@ const passwordValidator = () => (0, express_validator_1.check)("password")
     .isLength({ min: 8 })
     .withMessage("Please provide a valid password format");
 exports.passwordValidator = passwordValidator;
-const passwordConfirmValidator = () => (0, express_validator_1.check)("password")
+const passwordConfirmValidator = () => (0, express_validator_1.check)("passwordConfirm")
     .trim()
     .notEmpty()
     .custom((input, { req }) => input === req.body.password)
@@ -25,6 +26,7 @@ const passwordConfirmValidator = () => (0, express_validator_1.check)("password"
 exports.passwordConfirmValidator = passwordConfirmValidator;
 const phoneValidator = () => (0, express_validator_1.check)("phone")
     .isInt()
+    .notEmpty()
     .isMobilePhone("en-NG")
     .withMessage("Please provide nigerian mobile phone no");
 exports.phoneValidator = phoneValidator;

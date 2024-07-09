@@ -42,7 +42,7 @@ const orgSchema = new mongoose_1.Schema({
         {
             type: mongoose_1.default.Schema.Types.ObjectId,
             ref: "User",
-            required: true,
+            // required: true,
         },
     ],
     description: {
@@ -58,7 +58,10 @@ const orgSchema = new mongoose_1.Schema({
     },
 });
 orgSchema.statics.buildOrg = (attrs) => __awaiter(void 0, void 0, void 0, function* () {
-    return yield Org.create(Object.assign(Object.assign({}, attrs), { users: [attrs.userId] }));
+    console.log(attrs.userId, "The user id provided to the org");
+    const org = yield Org.create(Object.assign(Object.assign({}, attrs), { users: [attrs.userId] }));
+    console.log(org);
+    return org;
 });
 const Org = mongoose_1.default.model("Org", orgSchema);
 exports.default = Org;

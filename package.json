@@ -4,7 +4,7 @@
   "main": "server.ts",
   "scripts": {
     "build": "tsc",
-    "start": " nodemon --env-file config.env dist/server.js ",
+    "start": " npm run build && nodemon --env-file config.env dist/server.js ",
     "test": "jest --watchAll --no-cache"
   },
   "jest": {

@@ -14,12 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginRouter = void 0;
 const express_1 = __importDefault(require("express"));
-const validators_1 = require("../../services/validators");
 const requestValidator_1 = require("../../middleware/requestValidator");
 const User_1 = __importDefault(require("../../model/User"));
-const Crypto_1 = require("../../services/Crypto");
+const validators_1 = require("../../services/validators");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const BadRequest_1 = require("../../error/BadRequest");
+const Crypto_1 = require("../../services/Crypto");
 const router = express_1.default.Router();
 exports.loginRouter = router;
 router.post("/login", [(0, validators_1.emailValidator)(), (0, validators_1.passwordValidator)()], requestValidator_1.requestValidator, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -33,9 +33,12 @@ router.post("/login", [(0, validators_1.emailValidator)(), (0, validators_1.pass
         throw new Error(" Jwt timestamp not found ");
     if (!process.env.JWT_SECRET)
         throw new Error(" Jwt secret not found ");
-    const accessToken = jsonwebtoken_1.default.sign(existingUser, process.env.JWT_SECRET, {
+    const accessToken = jsonwebtoken_1.default.sign({ user: existingUser }, process.env.JWT_SECRET, {
         expiresIn: +process.env.JWT_EXPIRES_IN * 24 * 60 * 60,
     });
+    req.session = {
+        jwt: accessToken,
+    };
     res.status(200).json({
         status: "success",
         message: "Login successful",

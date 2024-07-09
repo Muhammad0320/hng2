@@ -22,6 +22,8 @@ const validators_1 = require("../../services/validators");
 const router = express_1.default.Router();
 exports.registerUserRouter = router;
 router.post("/register", [
+    (0, validators_1.nameValidator)("firstName"),
+    (0, validators_1.nameValidator)("lastName"),
     (0, validators_1.emailValidator)(),
     (0, validators_1.passwordValidator)(),
     (0, validators_1.passwordConfirmValidator)(),
@@ -44,7 +46,7 @@ router.post("/register", [
         throw new Error(" Jwt timestamp not found ");
     if (!process.env.JWT_SECRET)
         throw new Error(" Jwt secret not found ");
-    const accessToken = jsonwebtoken_1.default.sign(newUSer, process.env.JWT_SECRET, {
+    const accessToken = jsonwebtoken_1.default.sign({ user: newUSer }, process.env.JWT_SECRET, {
         expiresIn: +process.env.JWT_EXPIRES_IN * 24 * 60 * 60,
     });
     req.session = {
