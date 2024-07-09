@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import mongoose from "mongoose";
 
 
 interface UserPayload {
   user: {
-    userId: string;
+    userId: mongoose.Schema.Types.ObjectId;
     firstName: string;
     lastName: string;
     email: string;
