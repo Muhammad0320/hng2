@@ -9,83 +9,82 @@ it("returns a 400 for invalid inputs", async () => {
     .send({
       email: "shitmail",
       password: "shitPassword",
-      passwordConfim: "shitPassword",
+      passwordConfirm: "shitPassword",
       firstName: "paul",
       lastName: "lisanAlgaib",
       phone: 2349166537641,
     })
     .expect(400);
 
-  // await request(app)
-  //   .post("/api/auth/register")
-  //   .send({
-  //     password: "shitPassword",
-  //     passwordConfim: "shitPassword",
-  //     firstName: "paul",
-  //     lastName: "lisanAlgaib",
-  //     phone: 2349166537641,
-  //   })
-  //   .expect(400);
+  await request(app)
+    .post("/api/auth/register")
+    .send({
+      password: "shitPassword",
+      passwordConfirm: "shitPassword",
+      firstName: "paul",
+      lastName: "lisanAlgaib",
+      phone: 2349166537641,
+    })
+    .expect(400);
 
-  // await request(app)
-  //   .post("/api/auth/register")
-  //   .send({
-  //     email: "shitmail@gmail.com",
+  await request(app)
+    .post("/api/auth/register")
+    .send({
+      email: "shitmail@gmail.com",
 
-  //     passwordConfim: "shitPassword",
-  //     firstName: "paul",
-  //     lastName: "lisanAlgaib",
-  //     phone: 2349166537641,
-  //   })
-  //   .expect(400);
+      passwordConfirm: "shitPassword",
+      firstName: "paul",
+      lastName: "lisanAlgaib",
+      phone: 2349166537641,
+    })
+    .expect(400);
 
-  // await request(app)
-  //   .post("/api/auth/register")
-  //   .send({
-  //     email: "shitmail@gmail.com",
-  //     password: "shitPassword",
+  await request(app)
+    .post("/api/auth/register")
+    .send({
+      email: "shitmail@gmail.com",
+      password: "shitPassword",
+      firstName: "paul",
+      lastName: "lisanAlgaib",
+      phone: 2349166537641,
+    })
+    .expect(400);
 
-  //     firstName: "paul",
-  //     lastName: "lisanAlgaib",
-  //     phone: 2349166537641,
-  //   })
-  //   .expect(400);
+  await request(app)
+    .post("/api/auth/register")
+    .send({
+      email: "shitmail@gmail.com",
+      password: "shitPassword",
+      passwordConfirm: "shitPassword",
 
-  // await request(app)
-  //   .post("/api/auth/register")
-  //   .send({
-  //     email: "shitmail@gmail.com",
-  //     password: "shitPassword",
-  //     passwordConfim: "shitPassword",
+      lastName: "lisanAlgaib",
+      phone: 2349166537641,
+    })
+    .expect(400);
 
-  //     lastName: "lisanAlgaib",
-  //     phone: 2349166537641,
-  //   })
-  //   .expect(400);
+  await request(app)
+    .post("/api/auth/register")
+    .send({
+      email: "shitmail@gmail.com",
+      password: "shitPassword",
+      passwordConfirm: "shitPassword",
+      firstName: "paul",
+      lastName: "lisanAlgaib",
+      phone: 23491665376,
+    })
+    .expect(400);
 
-  // await request(app)
-  //   .post("/api/auth/register")
-  //   .send({
-  //     email: "shitmail@gmail.com",
-  //     password: "shitPassword",
-  //     passwordConfim: "shitPassword",
-  //     firstName: "paul",
-  //     lastName: "lisanAlgaib",
-  //     phone: 23491665376,
-  //   })
-  //   .expect(400);
-
-  // await request(app)
-  //   .post("/api/auth/register")
-  //   .send({
-  //     email: "shitmail@gmail.com",
-  //     password: "shitPassword",
-  //     passwordConfim: "shitPassword",
-  //     firstName: "paul",
-  //     lastName: "lisanAlgaib",
-  //     phone: "2349166537641",
-  //   })
-  //   .expect(400);
+  await request(app)
+    .post("/api/auth/register")
+    .send({
+      email: "shitmail@gmail.com",
+      password: "shitPassword",
+      passwordConfirm: "shitPassword",
+      firstName: "paul",
+      lastName: "lisanAlgaib",
+      phone: "2349166537641",
+    })
+    .expect(400);
 });
 
 it("returns a 400 if email already exists", async () => {
@@ -96,7 +95,7 @@ it("returns a 400 if email already exists", async () => {
     .send({
       email: user.email,
       password: "shitPassword",
-      passwordConfim: "shitPassword",
+      passwordConfirm: "shitPassword",
       firstName: "paul",
       lastName: "lisanAlgaib",
       phone: 2349166537641,
@@ -110,7 +109,7 @@ it("returns a 200 on valid input", async () => {
     .send({
       email: "shitmail@gmail.com",
       password: "shitPassword",
-      passwordConfim: "shitPassword",
+      passwordConfirm: "shitPassword",
       firstName: "paul",
       lastName: "lisanAlgaib",
       phone: 2349166537641,
@@ -128,7 +127,7 @@ it("creates an org off of the user", async () => {
     .send({
       email: "shitmail@gmail.com",
       password: "shitPassword",
-      passwordConfim: "shitPassword",
+      passwordConfirm: "shitPassword",
       firstName: "paul",
       lastName: "lisanAlgaib",
       phone: 2349166537641,
@@ -146,7 +145,7 @@ it("stores an acess token", async () => {
     .send({
       email: "shitmail@gmail.com",
       password: "shitPassword",
-      passwordConfim: "shitPassword",
+      passwordConfirm: "shitPassword",
       firstName: "paul",
       lastName: "lisanAlgaib",
       phone: 2349166537641,

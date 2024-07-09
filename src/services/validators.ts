@@ -16,11 +16,11 @@ export const passwordValidator = () =>
     .withMessage("Please provide a valid password format");
 
 export const passwordConfirmValidator = () =>
-  check("password")
-    .trim()
-    .notEmpty()
-    .custom((input: string, { req }) => input === req.body.password)
-    .withMessage("Passwords does not match");
+         check("passwordConfirm")
+           .trim()
+           .notEmpty()
+           .custom((input: string, { req }) => input === req.body.password)
+           .withMessage("Passwords does not match");
 
 export const phoneValidator = () =>
   check("phone")
