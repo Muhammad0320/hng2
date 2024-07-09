@@ -3,6 +3,8 @@ import { CustomError } from './CustomError';
 export class NotAuthorized extends CustomError {
   statusCode = 401;
 
+  status = "Unauthorized";
+
   constructor() {
     super();
 
@@ -10,6 +12,6 @@ export class NotAuthorized extends CustomError {
   }
 
   serializeError() {
-    return [{ message: 'Not Authorized, Please signin' }];
+    return [{ message: "Not Authorized, Please signin" }];
   }
 }
