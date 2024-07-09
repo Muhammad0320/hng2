@@ -1,15 +1,17 @@
 import { CustomError } from "./CustomError";
 
 export class Forbidden extends CustomError {
-  statusCode = 403;
+         statusCode = 403;
 
-  constructor(public message: string) {
-    super();
+         status = "Forbidden";
 
-    Object.setPrototypeOf(this, Forbidden.prototype);
-  }
+         constructor(public message: string) {
+           super();
 
-  serializeError() {
-    return [{ message: this.message }];
-  }
-}
+           Object.setPrototypeOf(this, Forbidden.prototype);
+         }
+
+         serializeError() {
+           return [{ message: this.message }];
+         }
+       }
