@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 import { CryptoManager } from "../services/Crypto";
 import Org from "./Organisation";
 
@@ -11,7 +11,8 @@ type UserAttrs = {
   phone: number;
 };
 
-type UserDoc = mongoose.Document & UserAttrs & { userId: string };
+type UserDoc = mongoose.Document &
+  UserAttrs & { userId: string; organisation: Array<string> };
 
 type UserModel = mongoose.Model<UserDoc> & {
   buildUser: (attrs: UserAttrs) => Promise<UserDoc>;
@@ -60,6 +61,13 @@ const userSchema = new mongoose.Schema<UserDoc, UserModel>(
       required: true,
       trim: true,
     },
+
+    organisation: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Org",
+      },
+    ],
   },
   {
     toJSON: {
@@ -70,12 +78,6 @@ const userSchema = new mongoose.Schema<UserDoc, UserModel>(
     },
   }
 );
-
-userSchema.virtual("organisations", {
-  foreignField: "users",
-  localField: "_id",
-  ref: "Organisation",
-});
 
 userSchema.pre("save", async function(next) {
   if (this.isNew) {
