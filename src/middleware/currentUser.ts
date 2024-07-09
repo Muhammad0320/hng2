@@ -33,7 +33,7 @@ export const currentUser = (
 ) => {
   if (!req.session?.jwt) return next();
 
-  const user = jwt.verify(req.session.jwt, process.env.JWT_KEY!) as unknown;
+  const user = jwt.verify(req.session.jwt, process.env.JWT_SECRET!) as unknown;
 
   const decoded = user as UserPayload;
 
@@ -41,5 +41,3 @@ export const currentUser = (
 
   next();
 };
-
-
