@@ -5,7 +5,7 @@ import { orgBuilder, userBuilder } from "../builder";
 
 it("returns a 401 for unauthenticated user", async () => {
   await request(app)
-    .get("/api/organisations/shitid/users")
+    .post("/api/organisations/shitid/users")
     .send()
 
     .expect(401);
@@ -13,7 +13,7 @@ it("returns a 401 for unauthenticated user", async () => {
 
 it("returns a 400 for invalid mongoose id", async () => {
   await request(app)
-    .get("/api/organisations/shitid/users")
+    .post("/api/organisations/shitid/users")
     .set("Cookie", await global.signin())
     .send()
 
@@ -26,7 +26,7 @@ it("returns a 404 for valid but umatched userId", async () => {
   const user = await userBuilder();
 
   await request(app)
-    .get(`/api/organisations/${id}/users`)
+    .post(`/api/organisations/${id}/users`)
     .set("Cookie", await global.signin())
     .send({ userId: user.id })
 
@@ -39,7 +39,7 @@ it("returns a 200 when e/thing is valid", async () => {
   const org = await orgBuilder(user.id);
 
   await request(app)
-    .get(`/api/organisations/${org.id}/users`)
+    .post(`/api/organisations/${org.id}/users`)
     .set("Cookie", await global.signin())
     .send({ userId: user.id })
 
