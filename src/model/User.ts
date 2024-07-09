@@ -92,11 +92,15 @@ userSchema.pre("save", async function(next) {
 userSchema.statics.buildUser = async function(attrs: UserAttrs) {
   const user = await User.create(attrs);
 
-  await Org.buildOrg({
+  const org = await Org.buildOrg({
     userId: user.userId,
     description: `${user.firstName}'s newly created organization`,
     name: `${user.firstName}'s org`,
   });
+
+  console.log(org, "New organisation");
+
+  await user.updateOne({ organisation: org.id });
 
   return user;
 };
