@@ -49,11 +49,11 @@ global.signin = async (id?: string) => {
 
   // create a jwt
 
-  if (!process.env.JWT_KEY) throw new Error("");
+  if (!process.env.JWT_SECRET) throw new Error("");
 
   if (!process.env.JWT_EXPIRES_IN) throw new Error("");
 
-  const token = jwt.sign({ user: payload }, process.env.JWT_KEY, {
+  const token = jwt.sign({ user: payload }, process.env.JWT_SECRET, {
     expiresIn: +process.env.JWT_EXPIRES_IN * 60 * 60,
   });
 

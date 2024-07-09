@@ -14,8 +14,7 @@ it("returns a 400 for invalid mongoose id", async () => {
   await request(app)
     .get("/api/users/shitid")
     .set("Cookie", await global.signin())
-  	.send()
-
+    .send()
     .expect(400);
 });
 
@@ -23,8 +22,7 @@ it("returns a 404 for valid but unmatched id", async () => {
   await request(app)
     .get("/api/users/" + new mongoose.Types.ObjectId().toHexString())
     .set("Cookie", await global.signin())
-  	.send()
-
+    .send()
     .expect(404);
 });
 
@@ -34,8 +32,7 @@ it("returns a 200 when everything is valid", async () => {
   await request(app)
     .get("/api/users/" + user.userId)
     .set("Cookie", await global.signin())
-  	.send()
-
+    .send()
     .expect(400);
 });
 
