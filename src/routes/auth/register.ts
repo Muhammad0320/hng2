@@ -54,7 +54,9 @@ router.post(
 
     if (!process.env.JWT_SECRET) throw new Error(" Jwt secret not found ");
 
-    const accessToken = jwt.sign(newUSer, process.env.JWT_SECRET, {
+    console.log(newUSer, "from the register------------");
+
+    const accessToken = jwt.sign({ user: newUSer }, process.env.JWT_SECRET, {
       expiresIn: +process.env.JWT_EXPIRES_IN * 24 * 60 * 60,
     });
 
