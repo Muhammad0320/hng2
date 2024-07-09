@@ -53,6 +53,8 @@ global.signin = async (id?: string) => {
 
   if (!process.env.JWT_EXPIRES_IN) throw new Error("");
 
+  console.log(process.env.JWT_SECRET, "From setup ts --------");
+
   const token = jwt.sign({ user: payload }, process.env.JWT_SECRET, {
     expiresIn: +process.env.JWT_EXPIRES_IN * 60 * 60,
   });
