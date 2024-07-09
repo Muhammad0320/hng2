@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 export const emailValidator = () =>
   check("email")
     .trim()
+    .notEmpty()
     .isEmail()
     .withMessage("Please provide a valid email format ");
 
@@ -24,6 +25,7 @@ export const passwordConfirmValidator = () =>
 export const phoneValidator = () =>
   check("phone")
     .isInt()
+    .notEmpty()
     .isMobilePhone("en-NG")
     .withMessage("Please provide nigerian mobile phone no");
 
