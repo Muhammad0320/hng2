@@ -4,10 +4,10 @@ exports.globalErrorHandler = void 0;
 const CustomError_1 = require("../error/CustomError");
 const globalErrorHandler = (err, req, res, next) => {
     if (err instanceof CustomError_1.CustomError) {
-        console.log(err);
-        return res
-            .status(err.statusCode)
-            .json({ status: "fail", message: err.serializeError() });
+        return res.status(err.statusCode).json({
+            status: "fail",
+            message: err.serializeError(),
+        });
     }
     console.log(err);
     return res
