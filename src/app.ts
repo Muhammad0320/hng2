@@ -32,7 +32,6 @@ app.use(
 let rootUrl = "/api/auth";
 
 
-
 app.get("/api", (req: Request, res: Response) => {
   res.send("Welcome!!!!!");
 });
