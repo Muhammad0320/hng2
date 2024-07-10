@@ -22,6 +22,7 @@ const BadRequest_1 = require("../../error/BadRequest");
 const Crypto_1 = require("../../services/Crypto");
 const router = express_1.default.Router();
 exports.loginRouter = router;
+// wait
 router.post("/login", [(0, validators_1.emailValidator)(), (0, validators_1.passwordValidator)()], requestValidator_1.requestValidator, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     const existingUser = yield User_1.default.findOne({ email }).select("+password");

@@ -8,6 +8,7 @@ import { BadRequest } from "../../error/BadRequest";
 import { CryptoManager } from "../../services/Crypto";
 
 const router = express.Router();
+// wait
 
 router.post(
   "/login",
